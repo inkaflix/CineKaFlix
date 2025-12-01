@@ -1,0 +1,579 @@
+/*
+=================================================
+             --- RESET Y BASE ---
+=================================================
+*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/*
+=================================================
+             --- ESTILOS DE LOGIN ---
+=================================================
+*/
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e9ecef;
+}
+
+.login-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #1a2a47;
+}
+
+/*
+=================================================
+         --- ESTILOS DEL DASHBOARD ---
+=================================================
+*/
+.admin-header {
+    background-color: #1a2a47; /* Azul oscuro similar a la imagen */
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header h1 {
+    font-size: 1.5rem;
+}
+
+.container {
+    padding: 20px 30px;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.filters input, .filters select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1;
+    min-width: 150px; 
+}
+
+/*
+=================================================
+          --- LISTADO DE CONTENIDO (CARDS) ---
+=================================================
+*/
+.content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.content-item { 
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s;
+}
+
+.content-item:hover {
+    transform: translateY(-2px);
+}
+
+.content-image-box { 
+    width: 80px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    position: relative; /* Para la insignia de tipo */
+}
+
+.content-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-type-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(26, 42, 71, 0.8); /* Fondo oscuro semitransparente */
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: bold;
+}
+
+.card-info {
+    flex-grow: 1;
+}
+
+.card-info h3 {
+    margin: 0 0 5px 0;
+    color: #1a2a47;
+    font-size: 1.2rem;
+}
+
+.content-genres, .content-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.card-actions {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 5px;
+}
+
+/*
+=================================================
+          --- BOTONES Y FORMULARIOS (GENERAL) ---
+=================================================
+*/
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"],
+.input-group input[type="url"],
+.input-group input[type="number"],
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+    text-align: center;
+}
+
+.btn.primary {
+    background-color: #3b5998; 
+    color: white;
+}
+.btn.primary:hover {
+    background-color: #2d4373;
+}
+
+.btn.secondary {
+    background-color: #5c677d; 
+    color: white;
+}
+.btn.secondary:hover {
+    background-color: #4b5465;
+}
+
+.btn.danger {
+    background-color: #d9534f; 
+    color: white;
+}
+.btn.danger:hover {
+    background-color: #c9302c;
+}
+
+.btn.small {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+.error-message, .loading-message, .empty-list {
+    text-align: center;
+    padding: 10px;
+    color: #d9534f;
+    font-weight: bold;
+}
+.loading-message {
+    color: #3b5998;
+}
+
+/*
+=================================================
+          --- MODAL STYLES (CRUD Y VIDEO) ---
+=================================================
+*/
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- ESTILOS ADICIONALES PARA EL MODAL DE VIDEO --- */
+
+.video-modal-content {
+    max-width: 90%; 
+    width: 800px; 
+    margin: 5% auto; 
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; 
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+/* --- ESTILOS PARA COPIAR URL --- */
+.url-copy-container {
+    display: flex;
+    gap: 5px;
+    margin-top: 15px;
+    align-items: center;
+}
+
+#copyInputVideo, #copyInputShare {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #eee; 
+    font-size: 0.9rem;
+    cursor: text;
+}
+
+.copy-message {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    height: 1.2em; 
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/*
+=================================================
+        --- ESTILOS LIVE SEARCH (TMDb) ---
+=================================================
+*/
+.tmdb-lookup {
+    position: relative; /* Contenedor para posicionar el dropdown */
+}
+
+/* Asegura que el input de búsqueda de TMDb tenga margen correcto */
+.tmdb-input-row {
+    display: flex;
+    gap: 5px;
+}
+
+/* Estilos para el contenedor de resultados desplegable */
+.tmdb-results-dropdown {
+    position: absolute; 
+    z-index: 1000;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #1a2a47; /* Borde para resaltarlo */
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para cada elemento de resultado */
+.tmdb-result-item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.tmdb-result-item:hover {
+    background-color: #f0f0f0;
+}
+
+.tmdb-result-item img {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.tmdb-result-item .info h4 {
+    margin: 0;
+    font-size: 0.95em;
+    color: #1a2a47;
+}
+
+.tmdb-result-item .info p {
+    margin: 0;
+    font-size: 0.75em;
+    color: #777;
+}
+
+
+/*
+=================================================
+             --- ESTILOS DE PAGINACIÓN ---
+=================================================
+*/
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 8px;
+    padding: 10px 0;
+}
+
+.pagination-btn {
+    padding: 8px 15px;
+    background-color: #fff;
+    color: #1a2a47;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.2s, border-color 0.2s;
+    cursor: pointer;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: #e9ecef;
+    border-color: #1a2a47;
+}
+
+.pagination-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination-btn.active-page {
+    background-color: #1a2a47;
+    color: white;
+    border-color: #1a2a47;
+    font-weight: bold;
+}
+
+/*
+=================================================
+             --- ESTILOS ADICIONALES SERIES ---
+=================================================
+*/
+
+/* Estilos para los campos de añadir/editar episodios */
+#episodesSection hr {
+    margin: 15px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.episode-input-group {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.episode-input-group label {
+    font-weight: normal;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 3px;
+}
+
+.episode-input-row {
+    display: flex;
+    gap: 5px;
+}
+
+.episode-input-row input {
+    flex-grow: 1;
+    margin: 0;
+    padding: 8px;
+}
+
+/* Lista de botones de episodios en el modal de video */
+.episode-list-container {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.episode-list-container ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.episode-list-container li {
+    flex-shrink: 0;
+}
+
+.episode-list-container a {
+    display: block;
+    padding: 6px 10px;
+    background-color: #5c677d;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.episode-list-container a:hover {
+    background-color: #4b5465;
+}
+
+
+/*
+=================================================
+             --- RESPONSIVE ---
+=================================================
+*/
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .content-item {
+        flex-direction: column;
+        text-align: center;
+        align-items: center; 
+    }
+    
+    .content-image-box { 
+        width: 150px; 
+        height: 225px; 
+        max-height: 250px;
+        margin-right: 0;
+        margin-bottom: 10px;
+        margin: 0 auto 10px auto; 
+    }
+    
+    .card-actions {
+        justify-content: center;
+    }
+    .filters input, .filters select {
+        min-width: 100%;
+    }
+    .url-copy-container {
+        flex-direction: column;
+    }
+    .url-copy-container button {
+        width: 100%;
+    }
+    
+    .video-modal-content {
+        max-width: 95%; 
+        margin: 10% auto; 
+    }
+}
