@@ -9,7 +9,7 @@
     
     <style>
     /* ----------------------------------------------------------------------
-    ESTILOS CSS (Incrustados)
+    ESTILOS CSS (SIN CAMBIOS)
     ---------------------------------------------------------------------- */
     
     /* Fuentes para asegurar consistencia (reducidas para el ejemplo) */
@@ -392,10 +392,8 @@
                     
                 </div>
                 
-                <div id="PlayerBottomBar"> <!-- id 284388A1B -->
-                    <p id="BottomBarTitle">Egao no Taenai Shokuba desu » Episodio 09 Sub Español
-
-#Egatae</p>
+                <div id="PlayerBottomBar">
+                    <p id="BottomBarTitle">Egao no Taenai Shokuba desu » Episodio 09 Sub Español</p>
                     <div id="BottomBarInfo">
                         <img class="flag-icon" src="https://embed69.org/static/lang/JAP.png" alt="LAT">
                         
@@ -423,7 +421,7 @@
                     
                     <nav class="language-tab-container" id="languageTabContainer" role="navigation" aria-label="Language selection">
                         <button class="language-tab active" data-lang="69233" onclick="changeLanguage('69233')" role="tab" aria-selected="true" aria-label="Select LAT language" tabindex="0">
-                            <img src="https://embed69.org/static/lang/JAP.png" alt="JAP flag" loading="lazy" width="24" height="24">
+                            <img src="https://embed69.org/static/lang/JAP.png" alt="LAT flag" loading="lazy" width="24" height="24">
                             <span>Latino</span>
                         </button>
                         
@@ -462,20 +460,20 @@
     
     <script>
     /* ----------------------------------------------------------------------
-    CÓDIGO JAVASCRIPT (ACTUALIZADO CON ELIMINACIÓN DE LÍMITE DE SERVIDORES)
+    CÓDIGO JAVASCRIPT **ACTUALIZADO**
     ---------------------------------------------------------------------- */
 
     let hideMenuTimeout;
     
-    // Contenedor de enlaces de embeds (IFRAME) directo.
+    
     let dataLink = [
         {"file_id":69233,"video_language":"LAT","sortedEmbeds":[
             {"servername":"vip","link":"https://rdflix.online/#6pcjrj","txt":"vip"},
-            {"servername":"streamwish","link":"https://hglink.to/e/z3f41eb5j9h6","txt":"streamwish"},
-            {"servername":"filemoon","link":"https://filemoon.to/e/2xgeqwyge6y1","txt":"filemoon"},
-            {"servername":"doodstream","link":"https://myvidplay.com/e/w2j4iv7zx3im","txt":"Doodstream"},
-            {"servername":"vidhide","link":"https://dintezuvio.com/embed/8pvwdcl851ln","txt":"vidhide"},
-            {"servername":"lulustream","link":"https://luluvid.com/e/gvecrjqqzn4w","txt":"lulustream"},
+            {"servername":"streamwish","link":"aHR0cHM6Ly9oZ2xpbmsudG8vZS96M2Y0MWViNWo5aDY=","txt":"streamwish"},
+            {"servername":"filemoon","link":"aHR0cHM6Ly9maWxlbW9vbi50by9lLzJ4Z2Vxd3lnZTZ5MQ==","txt":"filemoon"},
+            {"servername":"doodstream","link":"aHR0cHM6Ly9teXZpZHBsYXkuY29tL2UvdzJqNGl2N3p4M2lt","txt":"Doodstream"},
+            {"servername":"vidhide","link":"aHR0cHM6Ly9kaW50ZXp1dmlvLmNvbS9lbWJlZC84cHZ3ZGNsODUxbG4=","txt":"vidhide"},
+            {"servername":"lulustream","link":"aHR0cHM6Ly9sdWx1dmlkLmNvbS9lL2d2ZWNyanFxem40dw==","txt":"lulustream"},
             
             
         ]}
@@ -573,13 +571,30 @@
     }
 
     /**
-     * FUNCIÓN showTabContent: Muestra el pre-roll/artículo, espera 3s y luego carga el iframe.
+     * FUNCIÓN showTabContent: Descodifica el enlace Base64 y lo carga en el iframe.
+     * **ESTA ES LA PARTE CLAVE CON atob()**
      */
     function showTabContent(index) {
         const server = currentLanguageServers[index];
         const serverInfo = getServerInfo(server);
         const iframePlayer = document.getElementById('iframePlayer');
         const preRollArticle = document.getElementById('PreRollArticle');
+        
+        // -----------------------------------------------------------
+        // 1. LÓGICA DE DESCODIFICACIÓN
+        // -----------------------------------------------------------
+        const encodedLink = serverInfo.link; 
+        let decodedLink = '';
+        
+        try {
+            // **atob()** es la función nativa de JavaScript para **descodificar Base64**
+            decodedLink = atob(encodedLink); 
+        } catch (e) {
+            console.error("Error al decodificar Base64, usando enlace codificado:", e);
+            // En caso de error, se usa la cadena original (que debería ser Base64)
+            decodedLink = encodedLink; 
+        }
+        // -----------------------------------------------------------
         
         // 1. Mostrar pantalla de carga
         iframePlayer.style.display = 'none';
@@ -589,8 +604,8 @@
         setTimeout(() => {
             preRollArticle.style.display = 'none'; 
             
-            // 3. Cargar el iframe
-            iframePlayer.src = serverInfo.link; 
+            // 3. Cargar el iframe con el enlace **DESCodificado**
+            iframePlayer.src = decodedLink; 
             iframePlayer.style.display = 'block'; 
             
         }, 3000); 
@@ -817,7 +832,7 @@
                 serverCountText.textContent = `${currentLanguageServers.length} Servidores`;
             }
         } else {
-            serverControls.style.display = 'none';
+            document.getElementById('serverControls').style.display = 'none';
         }
     });
     
@@ -842,4 +857,3 @@
     </script>
 </body>
 </html>
-
