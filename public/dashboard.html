@@ -412,7 +412,7 @@
 
         function logout() {
             localStorage.removeItem('loggedIn');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
 
         // ====================================================================
@@ -642,7 +642,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('loggedIn') !== 'true') {
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
                 return;
             }
             
