@@ -382,7 +382,7 @@
         <div id="PlayerDisplay">
             
             <div id="FakePlayer" class="active" onclick="Play()" 
-                style="background-image: url('https://image.tmdb.org/t/p/original/5h2EsPKNDdB3MAtOk9MB9Ycg9Rz.jpg');">
+                style="background-image: url('https://image.tmdb.org/t/p/original/4JBfUOMP50CQ2Y7mOHwzXC0eqjY.jpg');">
                 
                 <div id="PlayCenteredContent">
                     <p id="PlayerTitleText">Estás viendo:</p>
@@ -392,12 +392,13 @@
                     
                 </div>
                 
-                <div id="PlayerBottomBar">
-                    <p id="BottomBarTitle">Zootopia 2</p>
+                <div id="PlayerBottomBar"> <p id="BottomBarTitle">Egao no Taenai Shokuba desu » Episodio 09 Sub Español
+
+#Egatae</p>
                     <div id="BottomBarInfo">
-                        <img class="flag-icon" src="https://embed69.org/static/lang/LAT.png" alt="LAT">
-                        <img class="flag-icon" src="https://embed69.org/static/lang/ESP.png" alt="ESP">
-                        <img class="flag-icon" src="https://embed69.org/static/lang/SUB.png" alt="SUB">
+                        <img class="flag-icon" src="https://embed69.org/static/lang/JAP.png" alt="LAT">
+                        
+                        
                         <div class="separator"></div>
                         <div class="status-dot"></div>
                         <span>ONLINE</span>
@@ -421,17 +422,10 @@
                     
                     <nav class="language-tab-container" id="languageTabContainer" role="navigation" aria-label="Language selection">
                         <button class="language-tab active" data-lang="69233" onclick="changeLanguage('69233')" role="tab" aria-selected="true" aria-label="Select LAT language" tabindex="0">
-                            <img src="https://embed69.org/static/lang/LAT.png" alt="LAT flag" loading="lazy" width="24" height="24">
+                            <img src="https://embed69.org/static/lang/JAP.png" alt="JAP flag" loading="lazy" width="24" height="24">
                             <span>Latino</span>
                         </button>
-                        <button class="language-tab " data-lang="69234" onclick="changeLanguage('69234')" role="tab" aria-selected="false" aria-label="Select ESP language" tabindex="-1">
-                            <img src="https://embed69.org/static/lang/ESP.png" alt="ESP flag" loading="lazy" width="24" height="24">
-                            <span>España</span>
-                        </button>
-                        <button class="language-tab " data-lang="692357" onclick="changeLanguage('692357')" role="tab" aria-selected="false" aria-label="Select SUB language" tabindex="-1">
-                            <img src="https://embed69.org/static/lang/SUB.png" alt="SUB flag" loading="lazy" width="24" height="24">
-                            <span>Subtitulado</span>
-                        </button>
+                        
                     </nav>
 
                     <div class="menu-control-bar" id="serverControls">
@@ -467,30 +461,26 @@
     
     <script>
     /* ----------------------------------------------------------------------
-    CÓDIGO JAVASCRIPT (ACTUALIZADO CON ELIMINACIÓN DE LÍMITE DE SERVIDORES)
+    CÓDIGO JAVASCRIPT (ACTUALIZADO CON ENLACES CODIFICADOS Y LÓGICA DE DESCODIFICACIÓN)
     ---------------------------------------------------------------------- */
 
     let hideMenuTimeout;
     
-    // Contenedor de enlaces de embeds (IFRAME) directo.
+    // Contenedor de enlaces de embeds (IFRAME) **codificado en Base64**.
     let dataLink = [
         {"file_id":69233,"video_language":"LAT","sortedEmbeds":[
-            {"servername":"streamwish","link":"https://hglink.to/e/rss9lvxsyyxi","txt":"Streamwish"},
-            {"servername":"filemoon","link":"https://filemoon.to/e/caxux8t9i0wl/","txt":"Filemoon"},
-            {"servername":"doodstream","link":"https://myvidplay.com/e/x98z6z6wfxao","txt":"Doodstream"},
-            
-        ]},
-        {"file_id":69234,"video_language":"ESP","sortedEmbeds":[
-            {"servername":"vidhide","link":"https://vidhide.org/embed-j4m7eozbyjdq.html","txt":"Vidhide"},
-            {"servername":"voe","link":"https://voe.live/e/a97igkusj0xf","txt":"Voe"},
-            {"servername":"vtube","link":"https://vtube.to/embed/7caacwglbjdg.html","txt":"Vtube"},
-            
-        ]},
-        {"file_id":692357,"video_language":"SUB","sortedEmbeds":[
-            {"servername":"vidhide","link":"https://vidhide.org/embed-railpspg7dsn.html","txt":"Vidhide"},
-            {"servername":"voe","link":"https://voe.live/e/72m4xeq7vqyp","txt":"Voe"},
-            {"servername":"vtube","link":"https://vtube.to/embed/hgfvezwdtnat.html","txt":"Vtube"},
-            
+            // Enlace original: https://rdflix.online/#6pcjrj
+            {"servername":"vip","link":"aHR0cHM6Ly9yZmxpeC5vbmxpbmUvIzZwdGNqcmo=","txt":"vip"},
+            // Enlace original: https://hglink.to/e/z3f41eb5j9h6
+            {"servername":"streamwish","link":"aHR0cHM6Ly9oZ2xpbmsudG8vZS96M2Y0MWViNWo5aDY=","txt":"streamwish"},
+            // Enlace original: https://filemoon.to/e/2xgeqwyge6y1
+            {"servername":"filemoon","link":"aHR0cHM6Ly9maWxlbW9vbi50by9lLzJ4Z2Vxd3lnZTYx","txt":"filemoon"},
+            // Enlace original: https://myvidplay.com/e/w2j4iv7zx3im
+            {"servername":"doodstream","link":"aHR0cHM6Ly9teXZpZHBsYXkuY29tL2UvdzJqNGl2N3p4M2lt","txt":"Doodstream"},
+            // Enlace original: https://dintezuvio.com/embed/8pvwdcl851ln
+            {"servername":"vidhide","link":"aHR0cHM6Ly9kaW50ZXp1dmlvLmNvbS9lbWJlZC84cHZ3ZGNsODUxbG4=","txt":"vidhide"},
+            // Enlace original: https://luluvid.com/e/gvecrjqqzn4w
+            {"servername":"lulustream","link":"aHR0cHM6Ly9sdWx1dmlkLmNvbS9lL2d2ZWNyanFrem40dw==","txt":"lulustream"},
         ]}
     ];
 
@@ -586,12 +576,28 @@
 
     /**
      * FUNCIÓN showTabContent: Muestra el pre-roll/artículo, espera 3s y luego carga el iframe.
+     * **ACTUALIZADA PARA DESCODIFICAR BASE64**
      */
     function showTabContent(index) {
         const server = currentLanguageServers[index];
         const serverInfo = getServerInfo(server);
         const iframePlayer = document.getElementById('iframePlayer');
         const preRollArticle = document.getElementById('PreRollArticle');
+        
+        // -----------------------------------------------------------
+        // 1. LÓGICA DE DESCODIFICACIÓN
+        // -----------------------------------------------------------
+        const encodedLink = serverInfo.link; 
+        let decodedLink = '';
+        
+        try {
+            // atob() es la función nativa de JavaScript para descodificar Base64
+            decodedLink = atob(encodedLink); 
+        } catch (e) {
+            console.error("Error al decodificar Base64, usando enlace sin modificar:", e);
+            decodedLink = encodedLink; 
+        }
+        // -----------------------------------------------------------
         
         // 1. Mostrar pantalla de carga
         iframePlayer.style.display = 'none';
@@ -601,8 +607,8 @@
         setTimeout(() => {
             preRollArticle.style.display = 'none'; 
             
-            // 3. Cargar el iframe
-            iframePlayer.src = serverInfo.link; 
+            // 3. Cargar el iframe con el enlace **DESCodificado**
+            iframePlayer.src = decodedLink; 
             iframePlayer.style.display = 'block'; 
             
         }, 3000); 
@@ -829,7 +835,7 @@
                 serverCountText.textContent = `${currentLanguageServers.length} Servidores`;
             }
         } else {
-            serverControls.style.display = 'none';
+            document.getElementById('serverControls').style.display = 'none';
         }
     });
     
