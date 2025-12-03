@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="es" itemscope="" itemtype="https://schema.org/VideoObject" data-fp="suyicy6uwh8">
-<head>    
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Menú Hamburguesa Cíclico y Reproductor</title>
+    <title>Menú Carrusel Vertical y Reproductor</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
     /* ----------------------------------------------------------------------
-    ESTILOS CSS (Incrustados)
+    ESTILOS CSS (Flecha / Palomita Reemplazada por PNG)
     ---------------------------------------------------------------------- */
     
     /* Fuentes para asegurar consistencia (reducidas para el ejemplo) */
     @font-face {font-family:Roboto Condensed;font-style:normal;font-weight:300;src:url(/cf-fonts/s/roboto-condensed/5.0.14/latin/300/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
-    @font-face {font-family:Roboto Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/roboto-condensed/5.0.14/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+    @font-face {font-family:Roboto Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/roboto-condensed/5.0.14/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
     @font-face {font-family:Roboto Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/roboto-condensed/5.0.14/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
     
     body {
@@ -57,7 +57,7 @@
         background-position: center;
         z-index: 200;
         display: flex;
-        flex-direction: column; /* Cambiamos a columna para centrar el contenido */
+        flex-direction: column; 
         justify-content: center;
         align-items: center;
         cursor: pointer;
@@ -74,22 +74,22 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex-grow: 1; /* Permite que el contenido ocupe el espacio */
+        flex-grow: 1; 
     }
     
     .PlayButton {
         width: 80px;
         height: 80px;
-        background-color: rgba(0, 123, 255, 0.8); /* Botón de Play azul */
+        background-color: rgba(0, 123, 255, 0.8); 
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #fff;
-        font-size: 40px; /* Tamaño del icono grande */
+        font-size: 40px; 
         transition: background-color 0.3s, transform 0.2s;
         border: none;
-        margin-bottom: 5px; /* Espacio antes del texto */
+        margin-bottom: 5px; 
     }
 
     .PlayButton:hover {
@@ -114,14 +114,14 @@
         bottom: 0;
         width: 100%;
         padding: 10px 15px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); /* Sombra negra degradada */
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); 
         color: white;
-        z-index: 201; /* Encima de FakePlayer */
+        z-index: 201; 
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        display: none; /* Oculto por defecto */
+        display: none; 
     }
     
     #BottomBarTitle {
@@ -129,7 +129,7 @@
         font-weight: 700;
         margin-bottom: 8px;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-        padding-top: 100px; /* Empuja el contenido para que se vea la sombra */
+        padding-top: 100px; 
     }
 
     #BottomBarInfo {
@@ -168,7 +168,7 @@
     }
     
     /* -------------------------------------- */
-    /* ESTILOS DEL MENÚ SUPERIOR (EXISTENTE) */
+    /* ESTILOS DEL MENÚ SUPERIOR */
     /* -------------------------------------- */
 
     #TopRightMenu {
@@ -225,8 +225,8 @@
         gap: 5px;
     }
 
-    /* Desplegables con más transparencia */
-    .language-tab-container, .tab-container {
+    /* Desplegables con más transparencia (Idiomas) */
+    .language-tab-container {
         display: flex;
         flex-direction: column;
         background-color: rgba(26, 26, 26, 0.5); 
@@ -243,14 +243,14 @@
         margin-top: 5px; 
     }
 
-    .language-tab-container.open, .tab-container.open {
+    .language-tab-container.open {
         max-height: 300px; 
         padding: 10px; 
         overflow-y: auto; 
     }
 
     /* Botones internos semitransparentes */
-    .language-tab, .tab {
+    .language-tab {
         display: flex;
         align-items: center;
         padding: 6px 12px;
@@ -267,9 +267,119 @@
         justify-content: flex-start; 
     }
 
-    .language-tab.active, .tab.active {
+    .language-tab.active {
         background-color: #007bff;
         box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+    }
+    
+    /* -------------------------------------- */
+    /* ESTILOS DEL CARRUSEL VERTICAL (SERVIDORES) */
+    /* -------------------------------------- */
+    #serverCarouselContainer {
+        /* Contenedor principal para el carrusel */
+        width: 150px; /* Ancho fijo para el carrusel */
+        height: 100px; /* Altura fija para mostrar 2 elementos parciales */
+        overflow: hidden;
+        margin-top: 5px;
+        background-color: rgba(26, 26, 26, 0.5); 
+        border-radius: 8px;
+        border: 1px solid rgba(51, 51, 51, 0.5);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: opacity 0.3s ease;
+        display: none; /* Oculto por defecto, se muestra al iniciar */
+        position: relative;
+    }
+    
+    #serverCarousel {
+        /* Contenedor de los elementos, con la magia del scroll-snap */
+        height: 100%;
+        overflow-y: scroll; /* Habilita el desplazamiento vertical */
+        scroll-snap-type: y mandatory; /* Forzar el "snap" (ajuste) vertical */
+        scroll-behavior: smooth; /* Desplazamiento suave */
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        /* Ocultar la barra de desplazamiento en navegadores */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    #serverCarousel::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .server-item {
+        /* Cada elemento del carrusel */
+        scroll-snap-align: center; /* Ajustar el elemento al centro del contenedor */
+        height: 50px; /* Altura de cada elemento */
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* Alineación a la izquierda */
+        cursor: pointer;
+        transition: transform 0.3s, opacity 0.3s;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+        padding: 5px 10px;
+        font-size: 16px;
+        color: #ccc;
+        font-weight: 400;
+        position: relative; /* Para la pseudoclase ::after */
+    }
+    
+    .server-item:last-child {
+        border-bottom: none;
+    }
+
+    .server-item.active {
+        /* Estilo para el servidor activo/seleccionado */
+        background-color: rgba(0, 123, 255, 0.9);
+        color: #fff;
+        font-weight: 700;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+        border-radius: 4px;
+        margin: 2px 0;
+        padding-right: 35px; /* Dejar espacio para el icono PNG */
+    }
+    
+    .server-item img {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        border-radius: 3px;
+    }
+    
+    .server-item span {
+        flex-grow: 1;
+        text-align: left;
+    }
+    
+    /* INDICADOR DE SERVIDOR ACTIVO (PNG PERSONALIZADO) */
+    .server-item.active::after {
+        content: ''; 
+        position: absolute;
+        right: 10px; /* Posición desde la derecha */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px; /* Tamaño del icono PNG */
+        height: 18px; /* Tamaño del icono PNG */
+        
+        /* ------------------------------------------------------------- */
+        /* === ESTO DEBES REEMPLAZARLO POR TU URL DEL PNG === */
+        /* Ejemplo: una flecha blanca o verde en formato PNG */
+        background-image: url('https://cdn.jsdelivr.net/gh/CJPlantillasStudios/plantillascj@master/servers/other.png'); 
+        /* Usaré un ejemplo simple de URL por ahora: */
+        /* Reemplazado por un SVG genérico de 'check' para demostrar el reemplazo de contenido */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="%23ffffff" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>');
+        /* ------------------------------------------------------------- */
+        
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+    /* Ocultamos los controles de menú originales ya que el carrusel es visible */
+    #serverControls, #serverTabContainer {
+        display: none !important;
     }
     
     #ArrowContainer {
@@ -300,7 +410,7 @@
 
     /* Media Query para Escritorio (768px o más) */
     @media (min-width: 768px) {
-        .language-tab-container, .tab-container {
+        .language-tab-container {
             max-height: none !important; 
             padding: 10px !important;
             flex-direction: row; 
@@ -322,6 +432,11 @@
         #FullMenuContainer {
              opacity: 1 !important; 
              display: flex !important;
+        }
+        
+        /* En escritorio, el carrusel se queda fijo, no se auto-oculta */
+        #serverCarouselContainer {
+             display: block !important;
         }
     }
 
@@ -382,23 +497,23 @@
         <div id="PlayerDisplay">
             
             <div id="FakePlayer" class="active" onclick="Play()" 
-                style="background-image: url('https://image.tmdb.org/t/p/original/4JBfUOMP50CQ2Y7mOHwzXC0eqjY.jpg');">
+                style="background-image: url('https://image.tmdb.org/t/p/original/5h2EsPKNDdB3MAtOk9MB9Ycg9Rz.jpg');">
                 
                 <div id="PlayCenteredContent">
-                    <p id="PlayerTitleText">Estás viendo:</p>
+                    <p id="PlayerTitleText">Estás viendo: Zootopia 2</p>
                     <div class="PlayButton">
                         <i class="fa-solid fa-play"></i>
                     </div>
                     
                 </div>
                 
-                <div id="PlayerBottomBar"> <p id="BottomBarTitle">Egao no Taenai Shokuba desu » Episodio 09 Sub Español
-
-#Egatae</p>
+                <div id="PlayerBottomBar">
+                    <p id="BottomBarTitle">Zootopia 2</p>
                     <div id="BottomBarInfo">
-                        <img class="flag-icon" src="https://embed69.org/static/lang/JAP.png" alt="LAT">
-                        
-                        
+                        <span id="ReleaseDateText">2024</span> <div class="separator"></div>
+                        <img class="flag-icon" src="https://embed69.org/static/lang/LAT.png" alt="LAT">
+                        <img class="flag-icon" src="https://embed69.org/static/lang/ESP.png" alt="ESP">
+                        <img class="flag-icon" src="https://embed69.org/static/lang/SUB.png" alt="SUB">
                         <div class="separator"></div>
                         <div class="status-dot"></div>
                         <span>ONLINE</span>
@@ -422,20 +537,23 @@
                     
                     <nav class="language-tab-container" id="languageTabContainer" role="navigation" aria-label="Language selection">
                         <button class="language-tab active" data-lang="69233" onclick="changeLanguage('69233')" role="tab" aria-selected="true" aria-label="Select LAT language" tabindex="0">
-                            <img src="https://embed69.org/static/lang/JAP.png" alt="JAP flag" loading="lazy" width="24" height="24">
+                            <img src="https://embed69.org/static/lang/LAT.png" alt="LAT flag" loading="lazy" width="24" height="24">
                             <span>Latino</span>
                         </button>
-                        
+                        <button class="language-tab " data-lang="69234" onclick="changeLanguage('69234')" role="tab" aria-selected="false" aria-label="Select ESP language" tabindex="-1">
+                            <img src="https://embed69.org/static/lang/ESP.png" alt="ESP flag" loading="lazy" width="24" height="24">
+                            <span>España</span>
+                        </button>
+                        <button class="language-tab " data-lang="692357" onclick="changeLanguage('692357')" role="tab" aria-selected="false" aria-label="Select SUB language" tabindex="-1">
+                            <img src="https://embed69.org/static/lang/SUB.png" alt="SUB flag" loading="lazy" width="24" height="24">
+                            <span>Subtitulado</span>
+                        </button>
                     </nav>
 
-                    <div class="menu-control-bar" id="serverControls">
-                        <span class="control-label">Servidores:</span>
-                        <button id="serverMenuToggle" class="menu-toggle" aria-label="Mostrar/Ocultar Servidores" aria-expanded="false">
-                            <i class="fa-solid fa-server"></i> <span id="serverToggleText">Mostrar</span>
-                        </button>
+                    <div id="serverCarouselContainer">
+                        <ul id="serverCarousel" role="listbox" aria-label="Selección de Servidor">
+                            </ul>
                     </div>
-                    
-                    <nav class="tab-container" id="serverTabContainer" role="navigation" aria-label="Server selection"></nav>
                 
                 </div>
                 
@@ -461,31 +579,62 @@
     
     <script>
     /* ----------------------------------------------------------------------
-    CÓDIGO JAVASCRIPT (ACTUALIZADO CON ENLACES CODIFICADOS Y LÓGICA DE DESCODIFICACIÓN)
+    CÓDIGO JAVASCRIPT
     ---------------------------------------------------------------------- */
 
     let hideMenuTimeout;
+    let currentActiveServerIndex = 0; 
     
-    // Contenedor de enlaces de embeds (IFRAME) **codificado en Base64**.
+    
     let dataLink = [
         {"file_id":69233,"video_language":"LAT","sortedEmbeds":[
-            // Enlace original: 
-            {"servername":"vip","link":"aHR0cHM6Ly9yZmxpeC5vbmxpbmUvIzZwdGNqcmo=","txt":"vip"},
-            // Enlace original: 
-            {"servername":"streamwish","link":"aHR0cHM6Ly9oZ2xpbmsudG8vZS96M2Y0MWViNWo5aDY=","txt":"streamwish"},
-            // Enlace original: 
-            {"servername":"filemoon","link":"aHR0cHM6Ly9maWxlbW9vbi50by9lLzJ4Z2Vxd3lnZTYx","txt":"filemoon"},
-            // Enlace original: 
-            {"servername":"doodstream","link":"aHR0cHM6Ly9teXZpZHBsYXkuY29tL2UvdzJqNGl2N3p4M2lt","txt":"Doodstream"},
-            // Enlace original: 
-            {"servername":"vidhide","link":"aHR0cHM6Ly9kaW50ZXp1dmlvLmNvbS9lbWJlZC84cHZ3ZGNsODUxbG4=","txt":"vidhide"},
-            // Enlace original: 
-            {"servername":"lulustream","link":"aHR0cHM6Ly9sdWx1dmlkLmNvbS9lL2d2ZWNyanFrem40dw==","txt":"lulustream"},
+            {"servername":"streamwish","link":"aHR0cHM6Ly9oZ2xpbmsudG8vZS9yc3M5bHZ4c3l5eGk=","txt":"Streamwish"},
+            {"servername":"filemoon","link":"aHR0cHM6Ly9maWxlbW9vbi50by9lL2NheHV4OHQ5aDB3bC8=","txt":"Filemoon"},
+            {"servername":"doodstream","link":"aHR0cHM6Ly9teXZpZHBsYXkuY29tL2UveDk4ejZ6NndmeGFv","txt":"Doodstream"},
+            {"servername":"vidhide","link":"aHR0cHM6Ly92aWRoaWRlLm9yZy9lbWJlZC1qNG03ZW96YnlqZHEuaHRtbA==","txt":"Vidhide #4"},
+            {"servername":"voe","link":"aHR0cHM6Ly92b2UubGl2ZS9lL2E5N2lna3VzajB4Zg==","txt":"Voe #5"},
+            {"servername":"vtube","link":"aHR0cHM6b2tlLnR1YmUvZW1iZWQvN2NhYWN3Z2xiamRnLmh0bWw=","txt":"Vtube #6"}, // Enlace de prueba
+        ]},
+        {"file_id":69234,"video_language":"ESP","sortedEmbeds":[
+            {"servername":"vidhide","link":"aHR0cHM6Ly92aWRoaWRlLm9yZy9lbWJlZC1qNG03ZW96YnlqZHEuaHRtbA==","txt":"Vidhide (ESP)"},
+            {"servername":"voe","link":"aHR0cHM6Ly92b2UubGl2ZS9lL2E5N2lna3VzajB4Zg==","txt":"Voe (ESP)"},
+            {"servername":"vtube","link":"aHR0cHM6Ly92dHViZS50by9lbWJlZC83Y2FhY3dnbGJqZGcuaHRtbA==","txt":"Vtube (ESP)"},
+        ]},
+        {"file_id":692357,"video_language":"SUB","sortedEmbeds":[
+            {"servername":"vidhide","link":"aHR0cHM6Ly92aWRoaWRlLm9yZy9lbWJlZC1yYWlscHNwZzdkc24uaHRtbA==","txt":"Vidhide (SUB)"},
+            {"servername":"voe","link":"aHR0cHM6Ly92b2UubGl2ZS9lLzcybTR4ZXE3dnF5cA==","txt":"Voe (SUB)"},
+            {"servername":"vtube","link":"aHR0cHM6Ly92dHViZS50by9lbWJlZC9oZ2Z2ZXp3ZHRuYXQuaHRtbA==","txt":"Vtube (SUB)"},
         ]}
     ];
 
+    // Datos de ejemplo para la película
+    const movieData = {
+        title: "Zootopia 2",
+        releaseDate: "2025-11-26", 
+    };
+
     let currentLanguageServers = [];
     
+    function formatReleaseDate(dateString) {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        return date.getFullYear().toString(); 
+    }
+
+    function updateTitleAndDate() {
+        const formattedDate = formatReleaseDate(movieData.releaseDate);
+        const releaseDateElement = document.getElementById('ReleaseDateText');
+        if (releaseDateElement) {
+            releaseDateElement.textContent = formattedDate;
+        }
+
+        const titleElement = document.getElementById('BottomBarTitle');
+        if (titleElement) {
+            titleElement.textContent = movieData.title;
+        }
+    }
+
+
     function getServerInfo(server) {
         let name = server.servername === 'streamingembed' ? 'vip' : server.servername;
         const serverNames = {
@@ -496,34 +645,35 @@
         
         return {
             link: server.link, 
-            // Ruta de ejemplo para los íconos de servidor
             icono: `https://embed69.org/static/server/${name}.ico`,
             name: serverNames[name] || name.charAt(0).toUpperCase() + name.slice(1),
             fullName: serverNames[name] || name.charAt(0).toUpperCase() + name.slice(1)
         };
     }
 
-    function renderServerTabs() {
-        const tabContainer = document.getElementById('serverTabContainer');
-        tabContainer.innerHTML = ''; 
+    function renderServerCarousel() {
+        const carousel = document.getElementById('serverCarousel');
+        const container = document.getElementById('serverCarouselContainer');
+        carousel.innerHTML = ''; 
         
         if (currentLanguageServers.length === 0) {
-            tabContainer.innerHTML = '<span>No hay servidores disponibles.</span>';
+            container.style.display = 'none';
             return;
         }
+
+        container.style.display = 'block';
 
         currentLanguageServers.forEach((server, index) => {
             const serverInfo = getServerInfo(server);
             
             if (!serverInfo.link) return; 
 
-            const tab = document.createElement('button');
-            tab.className = index === 0 ? 'tab active' : 'tab';
-            tab.dataset.fullname = serverInfo.name;
-            tab.setAttribute('role', 'tab');
-            tab.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-            tab.setAttribute('aria-label', `Select ${serverInfo.name} server - ${server.txt}`);
-            tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
+            const item = document.createElement('li');
+            item.className = index === currentActiveServerIndex ? 'server-item active' : 'server-item';
+            item.dataset.index = index;
+            item.setAttribute('role', 'option');
+            item.setAttribute('aria-selected', index === currentActiveServerIndex ? 'true' : 'false');
+            item.setAttribute('aria-label', `${serverInfo.name} - ${server.txt}`);
             
             const icon = document.createElement('img');
             icon.src = serverInfo.icono;
@@ -531,52 +681,91 @@
             icon.loading = 'lazy';
             icon.width = 18;
             icon.height = 18;
-            tab.appendChild(icon);
+            item.appendChild(icon);
             
             const text = document.createElement('span');
             text.textContent = server.txt;
-            tab.appendChild(text);
+            item.appendChild(text);
 
-            tab.onclick = () => {
-                switchTab(index);
-            };
-            tab.onkeypress = (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    switchTab(index);
+            // Clic para SELECCIONAR Y CARGAR INMEDIATAMENTE
+            item.onclick = () => {
+                // Solo cargar si es un servidor diferente o forzar recarga si ya está activo
+                if (index !== currentActiveServerIndex) {
+                    switchServer(index, true); 
+                    showTabContent(index);
+                } else {
+                    // Si ya está activo, recarga para forzar el temporizador de nuevo
+                    showTabContent(index);
                 }
             };
-            tabContainer.appendChild(tab);
+            carousel.appendChild(item);
         });
-    }
-
-    /**
-     * FUNCIÓN switchTab: Carga el servidor y OCULTA EL MENÚ DE SERVIDORES si estamos en móvil, iniciando el temporizador.
-     */
-    function switchTab(index) {
-        document.querySelectorAll('.tab').forEach((tab, i) => {
-            const isActive = i === index;
-            tab.classList.toggle('active', isActive);
-            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-            tab.setAttribute('tabindex', isActive ? '0' : '-1');
-        });
-        showTabContent(index);
         
-        // Cierra la sección colapsable de servidores en móvil y reinicia el auto-ocultamiento.
-        if (window.innerWidth < 768) {
-            const serverTabContainer = document.getElementById('serverTabContainer');
-            if (serverTabContainer.classList.contains('open')) {
-                serverTabContainer.classList.remove('open');
-                document.getElementById('serverToggleText').textContent = 'Mostrar';
-                document.getElementById('serverMenuToggle').setAttribute('aria-expanded', 'false');
-                resetAutoHide(); 
-            }
+        if (currentActiveServerIndex > 0) {
+            scrollToActiveServer(currentActiveServerIndex, false); 
         }
+        
+        carousel.removeEventListener('scroll', handleCarouselScroll);
+        carousel.addEventListener('scroll', handleCarouselScroll);
+    }
+    
+    let carouselScrollTimeout;
+
+    function handleCarouselScroll() {
+        clearTimeout(carouselScrollTimeout);
+        carouselScrollTimeout = setTimeout(() => {
+            const carousel = document.getElementById('serverCarousel');
+            const items = carousel.querySelectorAll('.server-item');
+            const itemHeight = 50; 
+            
+            const snapCenter = carousel.scrollTop + (carousel.clientHeight / 2);
+            let nearestIndex = Math.round((snapCenter - (carousel.clientHeight/2) + (itemHeight/2)) / itemHeight);
+            
+            nearestIndex = Math.max(0, Math.min(nearestIndex, items.length - 1));
+            
+            // Solo actualiza el estado visual, la carga es solo por CLIC
+            if (nearestIndex !== currentActiveServerIndex) {
+                switchServer(nearestIndex, false); 
+            }
+        }, 150); 
+    }
+
+
+    function scrollToActiveServer(index, animate = true) {
+        const carousel = document.getElementById('serverCarousel');
+        const itemHeight = 50; 
+        
+        const scrollTo = (index * itemHeight) - (carousel.clientHeight / 2) + (itemHeight / 2);
+        
+        carousel.scrollTo({
+            top: scrollTo,
+            behavior: animate ? 'smooth' : 'auto'
+        });
     }
 
     /**
-     * FUNCIÓN showTabContent: Muestra el pre-roll/artículo, espera 3s y luego carga el iframe.
-     * **ACTUALIZADA PARA DESCODIFICAR BASE64**
+     * FUNCIÓN switchServer: Selecciona el servidor en el carrusel.
+     */
+    function switchServer(index, forceScroll = true) {
+        const items = document.querySelectorAll('.server-item');
+        
+        currentActiveServerIndex = index;
+
+        items.forEach((item, i) => {
+            const isActive = i === index;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        
+        if (forceScroll) {
+            scrollToActiveServer(index);
+        }
+
+        resetAutoHide();
+    }
+
+    /**
+     * FUNCIÓN showTabContent: Inicia la pantalla de carga de 2s y luego el video.
      */
     function showTabContent(index) {
         const server = currentLanguageServers[index];
@@ -584,50 +773,43 @@
         const iframePlayer = document.getElementById('iframePlayer');
         const preRollArticle = document.getElementById('PreRollArticle');
         
-        // -----------------------------------------------------------
-        // 1. LÓGICA DE DESCODIFICACIÓN
-        // -----------------------------------------------------------
+        // Descodificación (sin cambios)
         const encodedLink = serverInfo.link; 
         let decodedLink = '';
-        
         try {
-            // atob() es la función nativa de JavaScript para descodificar Base64
             decodedLink = atob(encodedLink); 
         } catch (e) {
-            console.error("Error al decodificar Base64, usando enlace sin modificar:", e);
+            console.error("Error al decodificar Base64, usando enlace codificado:", e);
             decodedLink = encodedLink; 
         }
-        // -----------------------------------------------------------
         
-        // 1. Mostrar pantalla de carga
+        // 1. Ocultar el menú de control
+        if (window.innerWidth < 768) {
+            autoHideFullMenu();
+        }
+
+        // 2. Mostrar pantalla de carga
         iframePlayer.style.display = 'none';
         preRollArticle.style.display = 'flex'; 
         
-        // 2. Esperar 3 segundos (simulando pre-roll/búsqueda de enlace)
+        // 3. Esperar **2 segundos**
         setTimeout(() => {
             preRollArticle.style.display = 'none'; 
             
-            // 3. Cargar el iframe con el enlace **DESCodificado**
+            // 4. Cargar el iframe
             iframePlayer.src = decodedLink; 
             iframePlayer.style.display = 'block'; 
             
-        }, 3000); 
+        }, 2000); // **2 segundos**
     }
 
-    /**
-     * FUNCIÓN changeLanguage: Carga el idioma, sus servidores y OCULTA EL MENÚ DE IDIOMAS en móvil, iniciando el temporizador.
-     */
     function changeLanguage(fileId) {
         const fileIdString = fileId.toString();
-        const serverControls = document.getElementById('serverControls');
-        const serverTabContainer = document.getElementById('serverTabContainer');
         const languageTabContainer = document.getElementById('languageTabContainer');
         const languageMenuToggle = document.getElementById('languageMenuToggle');
         
-        // Actualiza el contador de servidores en la barra inferior (nueva estética)
         const serverCountText = document.getElementById('ServerCountText');
 
-        // 1. Actualiza el estado visual de las pestañas de idioma
         document.querySelectorAll('.language-tab').forEach(tab => {
             const isActive = tab.dataset.lang === fileIdString;
             tab.classList.toggle('active', isActive);
@@ -635,58 +817,43 @@
             tab.setAttribute('tabindex', isActive ? '0' : '-1');
         });
 
-        // 2. Busca los datos de servidores para el idioma seleccionado
         const langData = dataLink.find(d => d.file_id.toString() === fileIdString);
         
         if (langData && langData.sortedEmbeds.length > 0) {
             
-            // NO HAY LÍMITE DE SERVIDORES
             currentLanguageServers = langData.sortedEmbeds
                                         .filter(server => server.link !== null);
             
-            // 3. Renderiza las pestañas de servidores
+            currentActiveServerIndex = 0; 
+            
             if (currentLanguageServers.length > 0) {
-                 renderServerTabs();
+                 renderServerCarousel();
                  
-                 // Mostrar controles de servidor
-                 serverControls.style.display = 'flex';
-                 
-                 // Actualiza el contador
                  if(serverCountText) {
                      serverCountText.textContent = `${currentLanguageServers.length} Servidores`;
                  }
-                 
-                 if (window.innerWidth >= 768) {
-                    // Escritorio: abrir menú de servidores
-                    serverTabContainer.classList.add('open'); 
-                 } else {
-                    // Móvil: mantener menú de servidores cerrado
-                    serverTabContainer.classList.remove('open'); 
-                    document.getElementById('serverToggleText').textContent = 'Mostrar';
-                    document.getElementById('serverMenuToggle').setAttribute('aria-expanded', 'false');
-                 }
 
-                 // 4. Carga el primer servidor
-                 switchTab(0);
+                 // Al cambiar de idioma, seleccionamos y cargamos el primer servidor
+                 switchServer(0, false); 
+                 showTabContent(0);
             } else {
-                 serverTabContainer.innerHTML = '<span>No hay servidores embed disponibles.</span>';
+                 document.getElementById('serverCarousel').innerHTML = '<li>No hay servidores embed disponibles.</li>';
+                 document.getElementById('serverCarouselContainer').style.display = 'block'; 
                  document.getElementById('iframePlayer').src = '';
-                 serverControls.style.display = 'none';
                  if(serverCountText) {
                      serverCountText.textContent = `0 Servidores`;
                  }
             }
            
         } else {
-            serverTabContainer.innerHTML = '<span>No hay servidores disponibles para este idioma.</span>';
+            document.getElementById('serverCarousel').innerHTML = '<li>No hay servidores disponibles para este idioma.</li>';
+            document.getElementById('serverCarouselContainer').style.display = 'block';
             document.getElementById('iframePlayer').src = '';
-            serverControls.style.display = 'none';
              if(serverCountText) {
                  serverCountText.textContent = `0 Servidores`;
              }
         }
         
-        // Cierra la sección colapsable de idiomas en móvil.
         if (window.innerWidth < 768) {
             if (languageTabContainer.classList.contains('open')) {
                 languageTabContainer.classList.remove('open');
@@ -695,7 +862,6 @@
             }
         }
         
-        // Inicia el temporizador de auto-ocultamiento si es necesario.
         resetAutoHide();
     }
     
@@ -703,15 +869,11 @@
     // LÓGICA DE OCULTACIÓN / MOSTRACIÓN DEL MENÚ UNIFICADO (Móvil)
     // =========================================================================
 
-    /**
-     * FUNCIÓN para ocultar el menú completo y mostrar la flecha después de 2 segundos (solo en móvil).
-     */
     function autoHideFullMenu() {
         if (window.innerWidth < 768) {
              const fullMenu = document.getElementById('FullMenuContainer');
              const arrow = document.getElementById('ArrowContainer');
              
-             // Ocultar con transición CSS
              fullMenu.style.opacity = '0';
              
              setTimeout(() => {
@@ -721,9 +883,6 @@
         }
     }
     
-    /**
-     * FUNCIÓN para mostrar el menú completo y reiniciar el ciclo (solo en móvil).
-     */
     function showFullMenu() {
         const fullMenu = document.getElementById('FullMenuContainer');
         const arrow = document.getElementById('ArrowContainer');
@@ -737,19 +896,14 @@
         }
     }
     
-    /**
-     * FUNCIÓN para reiniciar el temporizador de 2 segundos.
-     */
     function resetAutoHide() {
         clearTimeout(hideMenuTimeout);
         
         if (window.innerWidth < 768) {
             const langOpen = document.getElementById('languageTabContainer').classList.contains('open');
-            const serverOpen = document.getElementById('serverTabContainer').classList.contains('open');
             
-            // El temporizador solo debe iniciar si AMBOS menús están cerrados.
-            if (!langOpen && !serverOpen) {
-                hideMenuTimeout = setTimeout(autoHideFullMenu, 2000); 
+            if (!langOpen) {
+                hideMenuTimeout = setTimeout(autoHideFullMenu, 3000); 
             }
         }
     }
@@ -759,48 +913,30 @@
      * FUNCIÓN PLAY: Inicializa la interfaz y carga el primer idioma/servidor.
      */
     function Play() {
+        updateTitleAndDate(); 
+        
         document.getElementById("FakePlayer").style.display = 'none';
         document.getElementById("TopRightMenu").style.display = 'flex'; 
         document.getElementById("iframeContainer").style.display = 'block'; 
-        document.getElementById("PlayerBottomBar").style.display = 'none'; // Ocultar barra estética después de Play
+        document.getElementById("PlayerBottomBar").style.display = 'none'; 
 
-        // 1. Configuramos la visibilidad inicial del menú
         const fullMenu = document.getElementById('FullMenuContainer');
         const arrow = document.getElementById('ArrowContainer');
         
-        // Mostrar menú completo al inicio y ocultar la flecha
         fullMenu.style.display = 'flex';
         fullMenu.style.opacity = '1';
         arrow.style.display = 'none';
         
-        // 2. Cargar el primer idioma (Esto inicia todo: renderiza servidores y el temporizador)
+        // Carga el primer idioma, que a su vez llama a showTabContent(0)
         changeLanguage('69233'); 
     }
     
-    // LÓGICA DE LOS MENÚS HAMBURGUESA (COLAPSABLES) - Y CONTROL DE TEMPORIZADOR
     document.addEventListener('DOMContentLoaded', () => {
-        const serverMenuToggle = document.getElementById('serverMenuToggle');
-        const serverTabContainer = document.getElementById('serverTabContainer');
+        updateTitleAndDate();
         
         const languageMenuToggle = document.getElementById('languageMenuToggle');
         const languageTabContainer = document.getElementById('languageTabContainer');
 
-        // Toggle Servidores
-        if (serverMenuToggle && serverTabContainer) {
-            serverMenuToggle.addEventListener('click', () => {
-                const isMenuOpen = serverTabContainer.classList.toggle('open');
-                document.getElementById('serverToggleText').textContent = isMenuOpen ? 'Ocultar' : 'Mostrar';
-                serverMenuToggle.setAttribute('aria-expanded', isMenuOpen);
-                
-                if (isMenuOpen) {
-                    clearTimeout(hideMenuTimeout); 
-                } else {
-                    resetAutoHide(); 
-                }
-            });
-        }
-        
-        // Toggle Lenguajes
         if (languageMenuToggle && languageTabContainer) {
             languageMenuToggle.addEventListener('click', () => {
                 const isMenuOpen = languageTabContainer.classList.toggle('open');
@@ -815,31 +951,27 @@
             });
         }
         
-        // Lógica para mostrar la barra flotante al cargar
         document.getElementById("PlayerBottomBar").style.display = 'flex';
         
-        // Pausar el temporizador si el ratón está sobre el contenedor
         const fullMenuContainer = document.getElementById('FullMenuContainer');
         fullMenuContainer.addEventListener('mouseenter', () => clearTimeout(hideMenuTimeout));
-        // Al salir, intentamos reiniciar el temporizador
         fullMenuContainer.addEventListener('mouseleave', resetAutoHide);
         
-        // Configuración inicial del menú de servidores al cargar
+        // Carga inicial de servidores para que el contador de la barra inferior esté listo
         const langData = dataLink.find(d => d.file_id.toString() === '69233');
         if (langData && langData.sortedEmbeds.length > 0) {
             currentLanguageServers = langData.sortedEmbeds.filter(server => server.link !== null);
-            renderServerTabs();
-            // Inicializar el contador de servidores
+            renderServerCarousel();
             const serverCountText = document.getElementById('ServerCountText');
             if(serverCountText) {
                 serverCountText.textContent = `${currentLanguageServers.length} Servidores`;
             }
         } else {
-            document.getElementById('serverControls').style.display = 'none';
+            document.getElementById('serverCarouselContainer').style.display = 'none';
         }
     });
     
-    // Control de redimensionamiento de ventana (para manejo escritorio/móvil)
+    // Control de redimensionamiento de ventana
     window.addEventListener('resize', () => {
         const isMobile = window.innerWidth < 768;
         const fullMenu = document.getElementById('FullMenuContainer');
