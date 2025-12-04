@@ -1,837 +1,614 @@
 <!DOCTYPE html>
-<html lang="es" itemscope="" itemtype="https://schema.org/VideoObject" data-fp="suyicy6uwh8">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Menú Hamburguesa Cíclico y Reproductor</title>
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Servidor Embed con Portada Adaptable</title>
     
     <style>
-    /* ----------------------------------------------------------------------
-    ESTILOS CSS (Incrustados)
-    ---------------------------------------------------------------------- */
-    
-    /* Fuentes para asegurar consistencia (reducidas para el ejemplo) */
-    @font-face {font-family:Roboto Condensed;font-style:normal;font-weight:300;src:url(/cf-fonts/s/roboto-condensed/5.0.14/latin/300/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
-    @font-face {font-family:Roboto Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/roboto-condensed/5.0.14/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
-    @font-face {font-family:Roboto Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/roboto-condensed/5.0.14/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
-    
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Roboto Condensed', sans-serif;
-        background-color: #0a0a0a;
-        overflow: hidden;
-    }
+        /* ======================================= */
+        /* === ESTILOS CSS (ADAPTADO Y CORREGIDO) === */
+        /* ======================================= */
 
-    #DisplayContent {
-        position: relative;
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
+        :root {
+            --color-fondo-modal: #2e2e2e;
+            --color-separador: #444;
+            --color-texto-activo: #fff;
+            --color-texto-inactivo: #ccc;
+            --color-web-view: #ff5722;
+            --color-play-button: #2196f3;
+            --color-online: #3db841;
+        }
 
-    #PlayerDisplay {
-        position: relative;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    /* -------------------------------------- */
-    /* ESTILOS DEL #FAKEPLAYER (PORTADA) */
-    /* -------------------------------------- */
-    #FakePlayer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        background-size: cover;
-        background-position: center;
-        z-index: 200;
-        display: flex;
-        flex-direction: column; /* Cambiamos a columna para centrar el contenido */
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: opacity 0.3s;
-    }
-
-    #FakePlayer:not(.active) {
-        display: none;
-    }
-
-    /* Contenedor central de Play y Texto */
-    #PlayCenteredContent {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1; /* Permite que el contenido ocupe el espacio */
-    }
-    
-    .PlayButton {
-        width: 80px;
-        height: 80px;
-        background-color: rgba(0, 123, 255, 0.8); /* Botón de Play azul */
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        font-size: 40px; /* Tamaño del icono grande */
-        transition: background-color 0.3s, transform 0.2s;
-        border: none;
-        margin-bottom: 5px; /* Espacio antes del texto */
-    }
-
-    .PlayButton:hover {
-        background-color: rgba(0, 123, 255, 1);
-        transform: scale(1.1);
-    }
-    
-    /* Título de la película debajo del Play */
-    #PlayerTitleText {
-        color: #fff;
-        font-size: 16px;
-        font-weight: 300;
-        margin-top: 5px;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
-    }
-
-    /* -------------------------------------- */
-    /* BARRA FLOTANTE INFERIOR (ESTÉTICA) */
-    /* -------------------------------------- */
-    #PlayerBottomBar {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 10px 15px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); /* Sombra negra degradada */
-        color: white;
-        z-index: 201; /* Encima de FakePlayer */
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        display: none; /* Oculto por defecto */
-    }
-    
-    #BottomBarTitle {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 8px;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-        padding-top: 100px; /* Empuja el contenido para que se vea la sombra */
-    }
-
-    #BottomBarInfo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 13px;
-        font-weight: 400;
-        opacity: 0.8;
-    }
-    
-    .flag-icon {
-        width: 20px;
-        height: 13px;
-        border-radius: 2px;
-        object-fit: cover;
-    }
-    
-    .separator {
-        width: 5px;
-        height: 5px;
-        background-color: #007bff;
-        border-radius: 50%;
-    }
-    
-    .server-count {
-        color: #007bff;
-        font-weight: 700;
-    }
-    
-    .status-dot {
-        width: 7px;
-        height: 7px;
-        background-color: #28a745;
-        border-radius: 50%;
-    }
-    
-    /* -------------------------------------- */
-    /* ESTILOS DEL MENÚ SUPERIOR (EXISTENTE) */
-    /* -------------------------------------- */
-
-    #TopRightMenu {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 550; 
-        display: none;
-        flex-direction: column;
-        align-items: flex-end; 
-        gap: 5px;
-        max-width: 90%;
-    }
-    
-    #FullMenuContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 5px;
-        transition: opacity 0.2s ease-in-out; 
-    }
-    
-    /* Menús Hamburguesa Transparentes */
-    .menu-control-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: transparent; 
-        padding: 10px 15px;
-        border-radius: 8px;
-        border: none; 
-        box-shadow: none; 
-        width: 100%; 
-    }
-
-    .control-label {
-        font-size: 14px;
-        color: #ccc;
-        font-weight: normal;
-        margin-right: 10px;
-    }
-
-    .menu-toggle {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 16px;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    /* Desplegables con más transparencia */
-    .language-tab-container, .tab-container {
-        display: flex;
-        flex-direction: column;
-        background-color: rgba(26, 26, 26, 0.5); 
-        color: #fff;
-        padding: 0 5px;
-        gap: 5px;
-        overflow: hidden;
-        border-radius: 8px;
-        border: 1px solid rgba(51, 51, 51, 0.5); 
-        box-shadow: none; 
-        max-height: 0; 
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-        width: 100%;
-        margin-top: 5px; 
-    }
-
-    .language-tab-container.open, .tab-container.open {
-        max-height: 300px; 
-        padding: 10px; 
-        overflow-y: auto; 
-    }
-
-    /* Botones internos semitransparentes */
-    .language-tab, .tab {
-        display: flex;
-        align-items: center;
-        padding: 6px 12px;
-        cursor: pointer;
-        background-color: rgba(42, 42, 42, 0.6); 
-        border-radius: 16px;
-        flex: 1 1 auto;
-        transition: all 0.3s;
-        gap: 8px;
-        border: none;
-        color: white;
-        font-family: inherit;
-        font-size: 14px;
-        justify-content: flex-start; 
-    }
-
-    .language-tab.active, .tab.active {
-        background-color: #007bff;
-        box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-    }
-    
-    #ArrowContainer {
-        display: none; 
-        position: absolute;
-        top: 15px; 
-        right: 15px;
-        z-index: 600;
-        cursor: pointer;
-    }
-
-    #ArrowButton {
-        background-color: rgba(26, 26, 26, 0.95);
-        color: #007bff;
-        border: 1px solid #007bff;
-        border-radius: 5px;
-        padding: 5px 8px; 
-        font-size: 16px; 
-        line-height: 1;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-        transition: background-color 0.2s;
-    }
-
-    #ArrowButton:hover {
-        background-color: rgba(0, 123, 255, 0.2);
-    }
-
-
-    /* Media Query para Escritorio (768px o más) */
-    @media (min-width: 768px) {
-        .language-tab-container, .tab-container {
-            max-height: none !important; 
-            padding: 10px !important;
-            flex-direction: row; 
-            width: auto;
-            border: none;
-            background-color: transparent;
-            box-shadow: none;
+        html, body {
+            height: 100%; 
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000;
+            color: var(--color-texto-activo);
+            display: flex;
         }
         
-        #TopRightMenu {
-            flex-direction: row; 
+        #video-embed-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
+            z-index: 1;
+        }
+        #video-embed-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
         
-        #ArrowContainer {
+        /* === ESTILOS PARA LA PORTADA === */
+        #cover-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        /* Estilo para ocultar la portada una vez que se carga el video */
+        .hidden {
             display: none !important;
         }
-        #FullMenuContainer {
-             opacity: 1 !important; 
-             display: flex !important;
+
+        #cover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
         }
-    }
+        
+        /* Ajuste: Botón de Play adaptado a móviles */
+        #play-button {
+            z-index: 3;
+            width: 60px; 
+            height: 60px; 
+            background-color: rgba(33, 150, 243, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        #play-button:hover {
+            transform: scale(1.05);
+        }
+        #play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid #fff;
+            margin-left: 3px;
+        }
 
-    /* Estilos del reproductor y pre-roll */
-    .iframe-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
+        /* Ajuste: Texto de la portada adaptado a móviles */
+        #cover-text {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%; 
+            color: #fff;
+            font-size: 1em; 
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            margin-top: -80px; 
+            z-index: 3;
+            white-space: nowrap;
+        }
+        
+        /* === ESTILOS PARA LA INFO INFERIOR === */
+        #bottom-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 8px 15px; 
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+            color: var(--color-texto-activo);
+            font-size: 0.8em; 
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 3;
+            box-sizing: border-box; 
+        }
 
-    #iframePlayer {
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-    
-    /* Estilos de carga */
-    #PreRollArticle {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%; 
-        height: 100%; 
-        background-color: #1a1a1a; 
-        z-index: 500; 
-        display: none; 
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 20px;
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
+        .info-left, .info-right {
+            display: flex;
+            align-items: center;
+        }
 
-    #PreRollArticle h2 {
-        color: #007bff;
-        margin-bottom: 15px;
-    }
+        .info-left span {
+            margin-right: 8px; 
+            font-weight: bold;
+        }
 
-    .spinner {
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top: 4px solid #007bff;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-    }
+        .flag-icon {
+            margin-right: 3px; 
+            font-size: 1em; 
+        }
+        
+        .flag-icon.mx { content: '🇲🇽'; } 
+        .flag-icon.es { content: '🇪🇸'; }
+        .flag-icon.us { content: '🇺🇸'; }
 
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+        .online-status {
+            color: var(--color-online);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .server-count {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .online-status::before {
+            content: '\2022'; 
+            color: var(--color-online);
+            font-size: 1.5em;
+            line-height: 0.5;
+            margin-right: 2px;
+            vertical-align: middle;
+        }
+        .server-count::before {
+            content: '\2022'; 
+            color: #2196f3; 
+            font-size: 1.5em;
+            line-height: 0.5;
+            margin-right: 2px;
+            vertical-align: middle;
+        }
+        
+        /* Elementos fijos sobre el reproductor */
+        
+        #top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: var(--color-texto-activo);
+            padding: 8px 15px; 
+            font-size: 1em; 
+            font-weight: bold;
+            z-index: 5;
+            box-sizing: border-box; 
+        }
+
+        /* Ajuste: Botón de opciones adaptado a móviles */
+        #open-menu-btn {
+            position: fixed;
+            bottom: 10px; 
+            right: 10px; 
+            padding: 8px 12px; 
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 4px; 
+            color: var(--color-texto-activo);
+            font-size: 1em; 
+            cursor: pointer;
+            z-index: 5;
+        }
+        #open-menu-btn::before {
+             content: '\2699';
+             margin-right: 3px;
+        }
+
+        /* Modal y su Contenido (Aseguramos que no se desborde) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            /* APLICACIÓN DE LA TRANSPARENCIA (80% de opacidad) */
+            background-color: rgba(46, 46, 46, 0.8); 
+            padding: 5px; 
+            border-radius: 4px;
+            width: 95%; 
+            max-width: 380px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-sizing: border-box;
+        }
+        
+        .modal-header {
+            padding: 8px 10px 5px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .modal-header h3 {
+            font-size: 1em;
+            font-weight: bold;
+            color: var(--color-texto-activo);
+            margin: 0;
+            flex: 1;
+        }
+        /* Alineación del encabezado "Audio" a la izquierda */
+        .modal-header h3:first-child {
+            text-align: left; 
+            padding-right: 15px; 
+            padding-left: 0;
+        }
+        .modal-header h3:last-child {
+            /* Alineación a la izquierda para Servidor */
+            text-align: left; 
+            padding-left: 15px;
+        }
+        
+        .options-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px 5px 10px;
+        }
+        .options-column {
+            flex: 1;
+        }
+        /* Alineación de la columna de audio a la izquierda */
+        .options-column:first-child {
+            border-right: 1px solid var(--color-separador);
+            padding-right: 15px;
+            display: flex;
+            justify-content: flex-start; 
+        }
+        .options-column:last-child {
+            padding-left: 15px;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: auto; 
+            max-width: 100%;
+        }
+
+        /* Estilo general de opciones */
+        .option, .server-item {
+            padding: 4px 0;
+            cursor: pointer;
+            font-size: 0.9em; 
+            color: var(--color-texto-inactivo);
+            transition: color 0.1s;
+            white-space: nowrap;
+        }
+        
+        /* Alineación del texto de Audio a la izquierda */
+        #audio-list .option {
+            text-align: left; 
+        }
+
+        /* Alineación del texto de Servidor a la izquierda (se mantiene) */
+        #server-list .server-item {
+            text-align: left; 
+        }
+        
+        .check-mark {
+            margin-right: 5px;
+            font-size: 0.9em;
+            color: var(--color-texto-activo);
+            display: none;
+        }
+        .check-mark::before {
+            content: '\2713';
+        }
+        .option.active .check-mark {
+            display: inline;
+        }
+        .option.active {
+            color: var(--color-texto-activo);
+        }
+        .server-item.active-server {
+            font-weight: bold; 
+            color: var(--color-texto-activo);
+        }
+        
+        .web-view {
+            color: var(--color-web-view); 
+            font-size: 0.75em;
+            margin-left: 10px;
+            float: right; 
+        }
+        
+        /* Media Query para Tabletas y Escritorio (si aplica) */
+        @media (min-width: 600px) {
+            #play-button { width: 80px; height: 80px; }
+            #cover-text { font-size: 1.2em; margin-top: -100px; }
+            #open-menu-btn { bottom: 20px; right: 20px; padding: 10px 15px; font-size: 1.2em; }
+        }
     </style>
 </head>
 <body>
-    <div id="DisplayContent">
-        <div id="PlayerDisplay">
-            
-            <div id="FakePlayer" class="active" onclick="Play()" 
-                style="background-image: url('https://image.tmdb.org/t/p/original/5h2EsPKNDdB3MAtOk9MB9Ycg9Rz.jpg');">
-                
-                <div id="PlayCenteredContent">
-                    <p id="PlayerTitleText">Estás viendo:</p>
-                    <div class="PlayButton">
-                        <i class="fa-solid fa-play"></i>
-                    </div>
-                    
-                </div>
-                
-                <div id="PlayerBottomBar">
-                    <p id="BottomBarTitle">Zootopia 2</p>
-                    <div id="BottomBarInfo">
-                        <img class="flag-icon" src="https://embed69.org/static/lang/LAT.png" alt="LAT">
-                        
-                        
-                        <div class="separator"></div>
-                        <div class="status-dot"></div>
-                        <span>ONLINE</span>
-                        <div class="separator"></div>
-                        <span class="server-count" id="ServerCountText">9 Servidores</span>
-                    </div>
-                </div>
 
+    <div id="top-header">
+        Zootopia 2
+    </div>
+
+    <div id="video-embed-container">
+        <div id="cover-screen">
+            <img id="cover-image" src="https://image.tmdb.org/t/p/original/5h2EsPKNDdB3MAtOk9MB9Ycg9Rz.jpg" alt="Portada de la Película">
+            
+            <p id="cover-text">Estás viendo: Zootopia 2</p>
+            
+            <div id="play-button"></div>
+            
+            <div id="bottom-info">
+                <div class="info-left">
+                    <span>2025</span> 
+                    <span class="flag-icon mx" title="Latino">🇲🇽</span>
+                    <!-- <span class="flag-icon es" title="Castellano">🇪🇸</span>
+                    <span class="flag-icon us" title="Subtitulado">🇺🇸</span>-->
+                </div>
+                <div class="info-right">
+                    <span class="online-status">ONLINE</span>
+                    <span id="server-count-display" class="server-count">9261 Servidores</span>
+                </div>
             </div>
-            
-            <div id="TopRightMenu">
-                
-                <div id="FullMenuContainer">
-                    
-                    <div class="menu-control-bar" id="languageControls">
-                        <span class="control-label">Idioma:</span>
-                        <button id="languageMenuToggle" class="menu-toggle" aria-label="Mostrar/Ocultar Idiomas" aria-expanded="false">
-                            <i class="fa-solid fa-language"></i> <span id="languageToggleText">Mostrar</span>
-                        </button>
-                    </div>
-                    
-                    <nav class="language-tab-container" id="languageTabContainer" role="navigation" aria-label="Language selection">
-                        <button class="language-tab active" data-lang="69233" onclick="changeLanguage('69233')" role="tab" aria-selected="true" aria-label="Select LAT language" tabindex="0">
-                            <img src="https://embed69.org/static/lang/LAT.png" alt="LAT flag" loading="lazy" width="24" height="24">
-                            <span>Latino</span>
-                        </button>
-                        
-                    </nav>
-
-                    <div class="menu-control-bar" id="serverControls">
-                        <span class="control-label">Servidores:</span>
-                        <button id="serverMenuToggle" class="menu-toggle" aria-label="Mostrar/Ocultar Servidores" aria-expanded="false">
-                            <i class="fa-solid fa-server"></i> <span id="serverToggleText">Mostrar</span>
-                        </button>
-                    </div>
-                    
-                    <nav class="tab-container" id="serverTabContainer" role="navigation" aria-label="Server selection"></nav>
-                
-                </div>
-                
-                <div id="ArrowContainer" onclick="showFullMenu()" role="button" aria-label="Mostrar Menú de Opciones">
-                    <button id="ArrowButton"><i class="fa-solid fa-arrow-up-left"></i></button>
-                </div>
-
-            </div>
-            
-            <section class="iframe-container" id="iframeContainer" role="region" aria-label="Video player" style="display: none;">
-                
-                <div id="PreRollArticle">
-                    <h2>Cargando Contenido...</h2>
-                    <p>Tu video se reproducirá en breve.</p>
-                    <p>Encontrando enlace</p>
-                    <div class="spinner"></div>
-                </div>
-                
-                <iframe id="iframePlayer" frameborder="0" allowfullscreen="" title="Video player iframe" loading="lazy"></iframe>
-            </section>
         </div>
     </div>
     
+    <button id="open-menu-btn"></button>
+
+    <div id="options-modal" class="modal">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h3>Audio</h3> 
+                <h3>Servidor</h3>
+            </div>
+            
+            <div class="options-container">
+                
+                <div class="options-column audio-column">
+                    <ul id="audio-list">
+                        <li class="option active" data-server-group="latino">
+                            <span class="check-mark"></span> LATINO
+                        </li>
+                        <!--  <li class="option" data-server-group="castellano">
+                            <span class="check-mark"></span> CASTELLANO
+                        </li>
+                        <li class="option" data-server-group="subtitulado">
+                            <span class="check-mark"></span> SUBTITULADO
+                        </li>-->
+                    </ul>
+                </div>
+
+                <div class="options-column server-column">
+                    <ul id="server-list">
+                        </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <script>
-    /* ----------------------------------------------------------------------
-    CÓDIGO JAVASCRIPT (ACTUALIZADO CON ELIMINACIÓN DE LÍMITE DE SERVIDORES)
-    ---------------------------------------------------------------------- */
-
-    let hideMenuTimeout;
-    
-    // Contenedor de enlaces de embeds (IFRAME) directo.
-    let dataLink = [
-        {"file_id":69233,"video_language":"LAT","sortedEmbeds":[
-            {"servername":"streamwish","link":"https://hglink.to/e/rss9lvxsyyxi","txt":"Streamwish"},
-            {"servername":"filemoon","link":"https://filemoon.to/e/caxux8t9i0wl/","txt":"Filemoon"},
-            {"servername":"doodstream","link":"https://myvidplay.com/e/x98z6z6wfxao","txt":"Doodstream"},
-            
-        ]}
-    ];
-
-    let currentLanguageServers = [];
-    
-    function getServerInfo(server) {
-        let name = server.servername === 'streamingembed' ? 'vip' : server.servername;
-        const serverNames = {
-            'vip': 'VIP', 'voe': 'Voe', 'vtube': 'Vtube', 'lulustream': 'Lulustream', 'filemoon': 'Filemoon',
-            'doodstream': 'Doodstream', 'streamtape': 'Streamtape', 'streamsilk': 'Streamsilk', 'streamwish': 'Streamwish',
-            'vidhide': 'Vidhide', 'uploadfox': 'Uploadfox', 'up2box': 'Up2Box', 'download': 'Download'
-        };
+        /* ======================================= */
+        /* === LÓGICA JS (CERRADO Y CARGA) === */
+        /* ======================================= */
         
-        return {
-            link: server.link, 
-            // Ruta de ejemplo para los íconos de servidor
-            icono: `https://embed69.org/static/server/${name}.ico`,
-            name: serverNames[name] || name.charAt(0).toUpperCase() + name.slice(1),
-            fullName: serverNames[name] || name.charAt(0).toUpperCase() + name.slice(1)
-        };
-    }
-
-    function renderServerTabs() {
-        const tabContainer = document.getElementById('serverTabContainer');
-        tabContainer.innerHTML = ''; 
-        
-        if (currentLanguageServers.length === 0) {
-            tabContainer.innerHTML = '<span>No hay servidores disponibles.</span>';
-            return;
-        }
-
-        currentLanguageServers.forEach((server, index) => {
-            const serverInfo = getServerInfo(server);
-            
-            if (!serverInfo.link) return; 
-
-            const tab = document.createElement('button');
-            tab.className = index === 0 ? 'tab active' : 'tab';
-            tab.dataset.fullname = serverInfo.name;
-            tab.setAttribute('role', 'tab');
-            tab.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-            tab.setAttribute('aria-label', `Select ${serverInfo.name} server - ${server.txt}`);
-            tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
-            
-            const icon = document.createElement('img');
-            icon.src = serverInfo.icono;
-            icon.alt = `${serverInfo.name} server icon`;
-            icon.loading = 'lazy';
-            icon.width = 18;
-            icon.height = 18;
-            tab.appendChild(icon);
-            
-            const text = document.createElement('span');
-            text.textContent = server.txt;
-            tab.appendChild(text);
-
-            tab.onclick = () => {
-                switchTab(index);
-            };
-            tab.onkeypress = (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    switchTab(index);
-                }
-            };
-            tabContainer.appendChild(tab);
-        });
-    }
-
-    /**
-     * FUNCIÓN switchTab: Carga el servidor y OCULTA EL MENÚ DE SERVIDORES si estamos en móvil, iniciando el temporizador.
-     */
-    function switchTab(index) {
-        document.querySelectorAll('.tab').forEach((tab, i) => {
-            const isActive = i === index;
-            tab.classList.toggle('active', isActive);
-            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-            tab.setAttribute('tabindex', isActive ? '0' : '-1');
-        });
-        showTabContent(index);
-        
-        // Cierra la sección colapsable de servidores en móvil y reinicia el auto-ocultamiento.
-        if (window.innerWidth < 768) {
-            const serverTabContainer = document.getElementById('serverTabContainer');
-            if (serverTabContainer.classList.contains('open')) {
-                serverTabContainer.classList.remove('open');
-                document.getElementById('serverToggleText').textContent = 'Mostrar';
-                document.getElementById('serverMenuToggle').setAttribute('aria-expanded', 'false');
-                resetAutoHide(); 
-            }
-        }
-    }
-
-    /**
-     * FUNCIÓN showTabContent: Muestra el pre-roll/artículo, espera 3s y luego carga el iframe.
-     */
-    function showTabContent(index) {
-        const server = currentLanguageServers[index];
-        const serverInfo = getServerInfo(server);
-        const iframePlayer = document.getElementById('iframePlayer');
-        const preRollArticle = document.getElementById('PreRollArticle');
-        
-        // 1. Mostrar pantalla de carga
-        iframePlayer.style.display = 'none';
-        preRollArticle.style.display = 'flex'; 
-        
-        // 2. Esperar 3 segundos (simulando pre-roll/búsqueda de enlace)
-        setTimeout(() => {
-            preRollArticle.style.display = 'none'; 
-            
-            // 3. Cargar el iframe
-            iframePlayer.src = serverInfo.link; 
-            iframePlayer.style.display = 'block'; 
-            
-        }, 3000); 
-    }
-
-    /**
-     * FUNCIÓN changeLanguage: Carga el idioma, sus servidores y OCULTA EL MENÚ DE IDIOMAS en móvil, iniciando el temporizador.
-     */
-    function changeLanguage(fileId) {
-        const fileIdString = fileId.toString();
-        const serverControls = document.getElementById('serverControls');
-        const serverTabContainer = document.getElementById('serverTabContainer');
-        const languageTabContainer = document.getElementById('languageTabContainer');
-        const languageMenuToggle = document.getElementById('languageMenuToggle');
-        
-        // Actualiza el contador de servidores en la barra inferior (nueva estética)
-        const serverCountText = document.getElementById('ServerCountText');
-
-        // 1. Actualiza el estado visual de las pestañas de idioma
-        document.querySelectorAll('.language-tab').forEach(tab => {
-            const isActive = tab.dataset.lang === fileIdString;
-            tab.classList.toggle('active', isActive);
-            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-            tab.setAttribute('tabindex', isActive ? '0' : '-1');
-        });
-
-        // 2. Busca los datos de servidores para el idioma seleccionado
-        const langData = dataLink.find(d => d.file_id.toString() === fileIdString);
-        
-        if (langData && langData.sortedEmbeds.length > 0) {
-            
-            // NO HAY LÍMITE DE SERVIDORES
-            currentLanguageServers = langData.sortedEmbeds
-                                        .filter(server => server.link !== null);
-            
-            // 3. Renderiza las pestañas de servidores
-            if (currentLanguageServers.length > 0) {
-                 renderServerTabs();
-                 
-                 // Mostrar controles de servidor
-                 serverControls.style.display = 'flex';
-                 
-                 // Actualiza el contador
-                 if(serverCountText) {
-                     serverCountText.textContent = `${currentLanguageServers.length} Servidores`;
-                 }
-                 
-                 if (window.innerWidth >= 768) {
-                    // Escritorio: abrir menú de servidores
-                    serverTabContainer.classList.add('open'); 
-                 } else {
-                    // Móvil: mantener menú de servidores cerrado
-                    serverTabContainer.classList.remove('open'); 
-                    document.getElementById('serverToggleText').textContent = 'Mostrar';
-                    document.getElementById('serverMenuToggle').setAttribute('aria-expanded', 'false');
-                 }
-
-                 // 4. Carga el primer servidor
-                 switchTab(0);
-            } else {
-                 serverTabContainer.innerHTML = '<span>No hay servidores embed disponibles.</span>';
-                 document.getElementById('iframePlayer').src = '';
-                 serverControls.style.display = 'none';
-                 if(serverCountText) {
-                     serverCountText.textContent = `0 Servidores`;
-                 }
-            }
-           
-        } else {
-            serverTabContainer.innerHTML = '<span>No hay servidores disponibles para este idioma.</span>';
-            document.getElementById('iframePlayer').src = '';
-            serverControls.style.display = 'none';
-             if(serverCountText) {
-                 serverCountText.textContent = `0 Servidores`;
-             }
-        }
-        
-        // Cierra la sección colapsable de idiomas en móvil.
-        if (window.innerWidth < 768) {
-            if (languageTabContainer.classList.contains('open')) {
-                languageTabContainer.classList.remove('open');
-                document.getElementById('languageToggleText').textContent = 'Mostrar';
-                languageMenuToggle.setAttribute('aria-expanded', 'false');
-            }
-        }
-        
-        // Inicia el temporizador de auto-ocultamiento si es necesario.
-        resetAutoHide();
-    }
-    
-    // =========================================================================
-    // LÓGICA DE OCULTACIÓN / MOSTRACIÓN DEL MENÚ UNIFICADO (Móvil)
-    // =========================================================================
-
-    /**
-     * FUNCIÓN para ocultar el menú completo y mostrar la flecha después de 2 segundos (solo en móvil).
-     */
-    function autoHideFullMenu() {
-        if (window.innerWidth < 768) {
-             const fullMenu = document.getElementById('FullMenuContainer');
-             const arrow = document.getElementById('ArrowContainer');
-             
-             // Ocultar con transición CSS
-             fullMenu.style.opacity = '0';
-             
-             setTimeout(() => {
-                fullMenu.style.display = 'none';
-                arrow.style.display = 'block'; 
-             }, 200); 
-        }
-    }
-    
-    /**
-     * FUNCIÓN para mostrar el menú completo y reiniciar el ciclo (solo en móvil).
-     */
-    function showFullMenu() {
-        const fullMenu = document.getElementById('FullMenuContainer');
-        const arrow = document.getElementById('ArrowContainer');
-        
-        if (window.innerWidth < 768) {
-            arrow.style.display = 'none';
-            fullMenu.style.display = 'flex';
-            fullMenu.style.opacity = '1';
-            
-            resetAutoHide(); 
-        }
-    }
-    
-    /**
-     * FUNCIÓN para reiniciar el temporizador de 2 segundos.
-     */
-    function resetAutoHide() {
-        clearTimeout(hideMenuTimeout);
-        
-        if (window.innerWidth < 768) {
-            const langOpen = document.getElementById('languageTabContainer').classList.contains('open');
-            const serverOpen = document.getElementById('serverTabContainer').classList.contains('open');
-            
-            // El temporizador solo debe iniciar si AMBOS menús están cerrados.
-            if (!langOpen && !serverOpen) {
-                hideMenuTimeout = setTimeout(autoHideFullMenu, 2000); 
-            }
-        }
-    }
-
-
-    /**
-     * FUNCIÓN PLAY: Inicializa la interfaz y carga el primer idioma/servidor.
-     */
-    function Play() {
-        document.getElementById("FakePlayer").style.display = 'none';
-        document.getElementById("TopRightMenu").style.display = 'flex'; 
-        document.getElementById("iframeContainer").style.display = 'block'; 
-        document.getElementById("PlayerBottomBar").style.display = 'none'; // Ocultar barra estética después de Play
-
-        // 1. Configuramos la visibilidad inicial del menú
-        const fullMenu = document.getElementById('FullMenuContainer');
-        const arrow = document.getElementById('ArrowContainer');
-        
-        // Mostrar menú completo al inicio y ocultar la flecha
-        fullMenu.style.display = 'flex';
-        fullMenu.style.opacity = '1';
-        arrow.style.display = 'none';
-        
-        // 2. Cargar el primer idioma (Esto inicia todo: renderiza servidores y el temporizador)
-        changeLanguage('69233'); 
-    }
-    
-    // LÓGICA DE LOS MENÚS HAMBURGUESA (COLAPSABLES) - Y CONTROL DE TEMPORIZADOR
-    document.addEventListener('DOMContentLoaded', () => {
-        const serverMenuToggle = document.getElementById('serverMenuToggle');
-        const serverTabContainer = document.getElementById('serverTabContainer');
-        
-        const languageMenuToggle = document.getElementById('languageMenuToggle');
-        const languageTabContainer = document.getElementById('languageTabContainer');
-
-        // Toggle Servidores
-        if (serverMenuToggle && serverTabContainer) {
-            serverMenuToggle.addEventListener('click', () => {
-                const isMenuOpen = serverTabContainer.classList.toggle('open');
-                document.getElementById('serverToggleText').textContent = isMenuOpen ? 'Ocultar' : 'Mostrar';
-                serverMenuToggle.setAttribute('aria-expanded', isMenuOpen);
+        document.addEventListener('DOMContentLoaded', () => {
+            // ----------------------------------------------------
+            // DATOS DE LOS SERVIDORES (MODIFICA AQUÍ)
+            // ----------------------------------------------------
+            const SERVER_DATA = {
+                // Servidores para Latino
+                'latino': [
+                    { name: 'VIP FREE', code: 'aHR0cHM6Ly9yZGZsaXgub25saW5lLyNqdG1sbmE=', type: 'base64' },
+                    { name: 'STREAMWISH', code: 'aHR0cHM6Ly9oZ2xpbmsudG8vZS9yc3M5bHZ4c3l5eGk=', type: 'base64' }, 
+                    { name: 'FILEMOON', code: 'aHR0cHM6Ly9maWxlbW9vbi50by9lL2NheHV4OHQ5aTB3bC8=', type: 'base64' },
+                    { name: 'DODOSTREAN', code: 'aHR0cHM6Ly9teXZpZHBsYXkuY29tL2UveDk4ejZ6NndmeGFv', type: 'base64'}
                 
-                if (isMenuOpen) {
-                    clearTimeout(hideMenuTimeout); 
-                } else {
-                    resetAutoHide(); 
+                ],
+               
+                'castellano': [
+                    { name: 'STREAMWISH', code: 'aHR0cHM6Ly9oZ2xpbmsudG8vZS9yc3M5bHZ4c3l5eGk=', type: 'base64' }, 
+                    { name: 'LULUSTREAM', code: 'aHR0cHM6Ly9leGFtcGxlLmNvbS9lbWJlZC8x', type: 'base64' },
+                    { name: 'FILEMOON', code: 'aHR0cHM6Ly9leGFtcGxlLmNvbS9lbWJlZC8y', type: 'base64' },
+                    { name: 'DODOSTREAN', code: 'aHR0cHM6Ly9leGFtcGxlLmNvbS9lbWJlZC8z', type: 'base64'}
+                
+                ],
+               
+                'subtitulado': [
+                    { name: 'SUB_SERVER_01', code: 'aHR0cHM6Ly9leGFtcGxlLmNvbS9lbWJlZC80', type: 'base64' }
+                ],
+              
+                // === SERVIDORES FIXED (MODIFICADOS PARA ABRIR URL) ===
+                'fixed': [
+                    // **IMPORTANTE:** Reemplaza 'https://ejemplo.com/...' con tus URLs reales.
+                    { name: 'DOWNLOAD', code: 'https://uasopt.com/d/rss9lvxsyyxi', type: 'link' },
+                    { name: 'VIP', code: 'https://uasopt.com/d/rss9lvxsyyxi', type: 'link' },
+                ]
+            };
+            
+            // --- Selectores ---
+            const modal = document.getElementById('options-modal');
+            const openMenuBtn = document.getElementById('open-menu-btn');
+            const audioOptions = document.querySelectorAll('#audio-list .option');
+            const serverList = document.getElementById('server-list');
+            const videoContainer = document.getElementById('video-embed-container');
+            const coverScreen = document.getElementById('cover-screen'); 
+            const playButton = document.getElementById('play-button');
+            const serverCountDisplay = document.getElementById('server-count-display'); 
+            
+            // --- Función para Decodificar Base64 ---
+            function base64Decode(encodedString) {
+                try {
+                    return decodeURIComponent(atob(encodedString).split('').map(function(c) {
+                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                    }).join(''));
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            /** Carga el iframe, OCULTA el modal y OCULTA la portada (o abre una nueva pestaña) */
+            function loadEmbed(serverItem) {
+                const code = serverItem.code;
+                const type = serverItem.type;
+                let embedUrl = '';
+                
+                if (type === 'base64') {
+                    // Carga normal del iframe
+                    embedUrl = base64Decode(code);
+                    if (!embedUrl) {
+                         videoContainer.innerHTML = `<p style="color:red; padding: 20px;">ERROR: El servidor ${serverItem.name} tiene un código no válido.</p>`;
+                         modal.style.display = 'none'; 
+                         return;
+                    }
+                    
+                    videoContainer.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
+                    coverScreen.classList.add('hidden'); // Oculta la portada al cargar el video
+                    
+                } else if (type === 'link') {
+                    // === LÓGICA DE APERTURA AUTOMÁTICA EN NUEVA PESTAÑA ===
+                    
+                    // Abre la URL en una nueva pestaña
+                    window.open(code, '_blank');
+                    
+                    // Cerramos el modal
+                    modal.style.display = 'none';
+                    
+                    // Nota: Mantenemos la portada visible, ya que el video no se está cargando aquí.
+                    // Si el usuario quiere ver el video, debe elegir un servidor base64.
+                }
+                
+                // Asegura que el modal se cierre después de la acción.
+                modal.style.display = 'none'; 
+            }
+
+            /** Muestra los servidores en la lista de la columna derecha */
+            function displayServers(audioGroup) {
+                serverList.innerHTML = ''; // Limpiar lista de servidores
+                
+                const activeServers = SERVER_DATA[audioGroup] || []; 
+                const fixedServers = SERVER_DATA.fixed || [];
+                
+                // Juntar servidores de audio activo y servidores fijos
+                const serversToDisplay = activeServers.concat(fixedServers);
+                
+                // Actualizar el contador de servidores en la portada
+                serverCountDisplay.textContent = `${serversToDisplay.length} Servidores`;
+
+                serversToDisplay.forEach((server, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'server-item';
+                    
+                    // Solo marca el primero del grupo activo si no es un servidor fijo
+                    // Y solo si el grupo activo no está vacío
+                    if (index === 0 && index < activeServers.length) {
+                         li.classList.add('active-server');
+                    }
+
+                    // Insertamos el texto del servidor con el "Web View"
+                    let extraInfo = '';
+                    if (server.type === 'base64') {
+                        extraInfo = '<span class="web-view">Web View</span>';
+                    } else if (server.type === 'link') {
+                        extraInfo = '<span class="web-view" style="color:#ff0000;">Download / Enlace</span>'; // Un estilo diferente para el fixed/link
+                    }
+                    
+                    li.innerHTML = `${server.name} ${extraInfo}`;
+                    
+                    li.addEventListener('click', function() {
+                        // Quitar 'active-server' a todos y ponerlo al seleccionado
+                        document.querySelectorAll('.server-item').forEach(s => s.classList.remove('active-server'));
+                        this.classList.add('active-server');
+                        
+                        // Carga el iframe o abre la nueva ventana
+                        loadEmbed(server);
+                    });
+                    
+                    serverList.appendChild(li);
+                });
+            }
+            
+            // --- Event Listeners ---
+            
+            // El botón de Play ABRE EL MODAL DE OPCIONES
+            playButton.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                // Asegura que la lista de servidores esté cargada
+                if (serverList.children.length === 0) {
+                    const activeAudio = document.querySelector('.option.active');
+                    if(activeAudio) {
+                        displayServers(activeAudio.getAttribute('data-server-group'));
+                    }
                 }
             });
-        }
-        
-        // Toggle Lenguajes
-        if (languageMenuToggle && languageTabContainer) {
-            languageMenuToggle.addEventListener('click', () => {
-                const isMenuOpen = languageTabContainer.classList.toggle('open');
-                document.getElementById('languageToggleText').textContent = isMenuOpen ? 'Ocultar' : 'Mostrar';
-                languageMenuToggle.setAttribute('aria-expanded', isMenuOpen);
-                
-                 if (isMenuOpen) {
-                    clearTimeout(hideMenuTimeout); 
-                } else {
-                    resetAutoHide(); 
-                }
-            });
-        }
-        
-        // Lógica para mostrar la barra flotante al cargar
-        document.getElementById("PlayerBottomBar").style.display = 'flex';
-        
-        // Pausar el temporizador si el ratón está sobre el contenedor
-        const fullMenuContainer = document.getElementById('FullMenuContainer');
-        fullMenuContainer.addEventListener('mouseenter', () => clearTimeout(hideMenuTimeout));
-        // Al salir, intentamos reiniciar el temporizador
-        fullMenuContainer.addEventListener('mouseleave', resetAutoHide);
-        
-        // Configuración inicial del menú de servidores al cargar
-        const langData = dataLink.find(d => d.file_id.toString() === '69233');
-        if (langData && langData.sortedEmbeds.length > 0) {
-            currentLanguageServers = langData.sortedEmbeds.filter(server => server.link !== null);
-            renderServerTabs();
-            // Inicializar el contador de servidores
-            const serverCountText = document.getElementById('ServerCountText');
-            if(serverCountText) {
-                serverCountText.textContent = `${currentLanguageServers.length} Servidores`;
-            }
-        } else {
-            serverControls.style.display = 'none';
-        }
-    });
-    
-    // Control de redimensionamiento de ventana (para manejo escritorio/móvil)
-    window.addEventListener('resize', () => {
-        const isMobile = window.innerWidth < 768;
-        const fullMenu = document.getElementById('FullMenuContainer');
-        const arrow = document.getElementById('ArrowContainer');
-        
-        if (!isMobile) {
-            fullMenu.style.display = 'flex';
-            fullMenu.style.opacity = '1';
-            arrow.style.display = 'none';
-            clearTimeout(hideMenuTimeout);
-        } else {
-            if (fullMenu.style.display !== 'none' || arrow.style.display === 'block') {
-                resetAutoHide(); 
-            }
-        }
-    });
 
+            // Evento de click en las opciones de Audio (Columna izquierda)
+            audioOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // 1. Manejo del Check (sólo uno activo)
+                    audioOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 2. Carga de servidores filtrados en la columna derecha
+                    const selectedGroup = this.getAttribute('data-server-group');
+                    displayServers(selectedGroup);
+                });
+            });
+
+            // Botón para abrir el menú (Settings ⚙️)
+            openMenuBtn.onclick = () => { 
+                modal.style.display = 'flex'; 
+                // Asegura que la lista de servidores se cargue al abrir el menú
+                if (serverList.children.length === 0) {
+                     const activeAudio = document.querySelector('.option.active');
+                    if(activeAudio) {
+                        displayServers(activeAudio.getAttribute('data-server-group'));
+                    }
+                }
+            }
+            
+            // Cerrar Modal haciendo clic fuera
+            window.onclick = (event) => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
+            // --- Inicialización ---
+            // Inicia el sistema cargando LATINO por defecto y mostrando la lista inicial de servidores
+            const initialAudio = document.querySelector('.option.active');
+            if(initialAudio) {
+                displayServers(initialAudio.getAttribute('data-server-group'));
+            }
+        });
     </script>
 </body>
 </html>
